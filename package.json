@@ -1,0 +1,9 @@
+{
+  "name": "gonagamuwa-stores-tauri-offline",
+  "version": "4.0.0",
+  "private": true,
+  "description": "Gonagamuwa Stores Windows offline Tauri SQLite with manual Save As backup and JSON restore",
+  "scripts": {"desktop": "tauri dev", "build:windows": "tauri build --bundles nsis"},
+  "dependencies": {"@tauri-apps/api": "^2.0.0", "@tauri-apps/plugin-dialog": "^2.0.0"},
+  "devDependencies": {"@tauri-apps/cli": "^2.0.0"}
+}

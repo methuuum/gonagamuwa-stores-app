@@ -1,0 +1,572 @@
+<!doctype html>
+<html lang="si">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ගෝනගමුව ස්ටෝර්ස්</title>
+<link rel="icon" type="image/png" href="icon.png">
+
+<!-- Offline Windows Edition: all financial data stored in local SQLite. -->
+<link rel="stylesheet" href="style.css">
+
+<!-- mobile glass scrollbar -->
+
+
+
+
+
+
+
+</head>
+<body class="locked">
+<div id="loginGate" role="dialog" aria-modal="true" aria-labelledby="loginTitle">
+  <button class="theme-toggle" id="loginThemeToggle" type="button" role="switch" aria-checked="false" aria-label="Dark Mode සක්‍රිය කරන්න" title="Dark / Light Mode මාරු කරන්න"><span class="theme-icon" aria-hidden="true">🌙</span><span class="theme-state">Dark</span><span class="theme-track" aria-hidden="true"><span class="theme-thumb"></span></span></button>
+  <div class="pin-login-shell">
+    <section class="pin-login-showcase" aria-label="ගෝනගමුව ස්ටෝර්ස් හැඳින්වීම">
+      <div class="pin-showcase-top"><span class="pin-showcase-logo" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 4c-8 0-14 2.5-14 11a5 5 0 0 0 5 5c8.5 0 11-6 9-16Z"/><path d="M4 21c3.5-6 7-9 12-12"/></svg></span><span class="pin-showcase-brand">GONAGAMUWA <b>STORES</b></span></div>
+      <div class="pin-showcase-body"><div class="pin-showcase-kicker"><span class="pin-live-dot"></span> TEA COLLECTION MANAGEMENT</div><h2>ඔබේ දෛනික<br><em>වැඩ පහසු කරමු.</em></h2><p>දලු සටහන්, කඩ ණය, අඩුකිරීම් සහ මාසික බිල්පත් — එකම තැනකින්.</p>
+        <div class="pin-feature-pills"><span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M8 12l3 3 5-6"/><circle cx="12" cy="12" r="9"/></svg>දෛනික දලු</span><span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="4" y="4" width="16" height="16" rx="3"/><path d="M8 9h8M8 13h8M8 17h4"/></svg>කඩ ණය</span><span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M7 3h10a2 2 0 0 1 2 2v16l-3-2-4 2-4-2-3 2V5a2 2 0 0 1 2-2Z"/><path d="M9 9h6M9 13h6"/></svg>මාසික බිල්පත්</span></div>
+      </div>
+      <div class="pin-showcase-bottom"><span class="pin-showcase-shield">✦</span> BY METHUUUM <span class="pin-showcase-divider">/</span> GONAGAMUWA STORES</div>
+      <div class="pin-orb pin-orb-one" aria-hidden="true"></div><div class="pin-orb pin-orb-two" aria-hidden="true"></div><div class="pin-orb pin-orb-three" aria-hidden="true"></div>
+    </section>
+    <section class="login-card pin-login-panel" aria-label="PIN පිවිසුම">
+      <div class="pin-mobile-mark" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 4c-8 0-14 2.5-14 11a5 5 0 0 0 5 5c8.5 0 11-6 9-16Z"/><path d="M4 21c3.5-6 7-9 12-12"/></svg></div>
+      <div class="pin-panel-eyebrow"><span class="pin-eyebrow-icon" aria-hidden="true">⌑</span> ADMIN ACCESS</div>
+      <h2 id="loginTitle">ආයුබෝවන්! <span aria-hidden="true">👋</span></h2>
+      <p class="pin-panel-subtitle">ගෝනගමුව ස්ටෝර්ස් පද්ධතියට පිවිසීමට<br>ඔබගේ අංක 4ක PIN එක ඇතුළත් කරන්න.</p>
+      <form id="loginForm" autocomplete="off" novalidate>
+        <label for="adminPassword" class="pin-label">පිවිසුම් PIN අංකය</label>
+        <div class="pin-field">
+          <span class="pin-field-lock" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="10" width="14" height="11" rx="3"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg></span>
+          <input id="adminPassword" name="pin" type="password" inputmode="numeric" pattern="[0-9]{4}" maxlength="4" autocomplete="off" required placeholder="••••" aria-describedby="pinHelp loginError">
+          <span class="pin-field-four" aria-hidden="true">4 DIGITS</span>
+        </div>
+        <div class="pin-progress" aria-label="PIN ඉලක්කම් 4" aria-hidden="true"><span class="pin-progress-dot"></span><span class="pin-progress-dot"></span><span class="pin-progress-dot"></span><span class="pin-progress-dot"></span></div>
+        <div id="loginError" role="alert" aria-live="assertive"></div>
+        <div class="pin-keypad" aria-label="PIN number pad">
+          <button class="pin-digit" type="button" data-pin-key="1" aria-label="1">1</button><button class="pin-digit" type="button" data-pin-key="2" aria-label="2">2</button><button class="pin-digit" type="button" data-pin-key="3" aria-label="3">3</button>
+          <button class="pin-digit" type="button" data-pin-key="4" aria-label="4">4</button><button class="pin-digit" type="button" data-pin-key="5" aria-label="5">5</button><button class="pin-digit" type="button" data-pin-key="6" aria-label="6">6</button>
+          <button class="pin-digit" type="button" data-pin-key="7" aria-label="7">7</button><button class="pin-digit" type="button" data-pin-key="8" aria-label="8">8</button><button class="pin-digit" type="button" data-pin-key="9" aria-label="9">9</button>
+          <span class="pin-key-empty" aria-hidden="true"></span><button class="pin-digit" type="button" data-pin-key="0" aria-label="0">0</button><button class="pin-digit pin-backspace" type="button" data-pin-backspace aria-label="අවසාන අංකය මකන්න" title="Backspace"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 5H20a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H9L2 12l7-7Z"/><path d="m12 9 6 6m0-6-6 6"/></svg></button>
+        </div>
+        <button class="pin-login-submit" id="loginSubmit" type="submit"><span>Dashboard වෙත පිවිසෙන්න</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14m-6-6 6 6-6 6"/></svg></button>
+      </form>
+      <p class="pin-hint" id="pinHelp"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10Z"/><path d="m9 12 2 2 4-4"/></svg> නිවැරදි PIN එක ඇතුළත් කළ ගමන් පිවිසෙයි</p>
+      <p class="login-foot">GONAGAMUWA STORES <span>·</span> CREATED BY METHUUUM</p>
+    </section>
+  </div>
+</div>
+<div id="appRoot" hidden>
+
+<header class="glass-topbar">
+ <div class="brand-block"><span class="brand-logo" aria-hidden="true"><svg class="brand-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 4c-8 0-14 2.5-14 11a5 5 0 0 0 5 5c8.5 0 11-6 9-16Z"/><path d="M4 21c3.5-6 7-9 12-12"/></svg></span>
+ <div class="brand-copy"><h1>ගෝනගමුව ස්ටෝර්ස්</h1><small>Created By Methuuum <span class="brand-sep">✦</span> TEA COLLECTION</small></div></div>
+ <div class="admin-tools">
+  <span class="date-pill"><svg class="ui-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M16 3v4M8 3v4M3 10h18"/></svg><span id="today"></span></span>
+  <button id="settingsTrigger" type="button" aria-controls="settingsPanel" aria-haspopup="dialog" aria-expanded="false" title="සැකසුම් විවෘත කරන්න">
+    <svg class="ui-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06-1.8 1.8-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V20h-2.55v-.09a1.65 1.65 0 0 0-1.05-1.53 1.65 1.65 0 0 0-1.81.34l-.06.06-1.8-1.8.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H4v-2.55h.09a1.65 1.65 0 0 0 1.53-1.05 1.65 1.65 0 0 0-.34-1.81l-.06-.06 1.8-1.8.06.06a1.65 1.65 0 0 0 1.82.33 1.65 1.65 0 0 0 1-1.51V4h2.55v.09a1.65 1.65 0 0 0 1.05 1.53 1.65 1.65 0 0 0 1.81-.34l.06-.06 1.8 1.8-.06.06a1.65 1.65 0 0 0-.33 1.82 1.65 1.65 0 0 0 1.51 1H20v2.55h-.09A1.65 1.65 0 0 0 18.4 15z"/></svg>
+    <span>සැකසුම්</span>
+  </button>
+ </div>
+</header>
+<nav aria-label="ප්‍රධාන මෙනුව">
+ <button class="active" data-page="home"><svg class="ui-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="8" height="8" rx="2"/><rect x="13" y="3" width="8" height="8" rx="2"/><rect x="3" y="13" width="8" height="8" rx="2"/><rect x="13" y="13" width="8" height="8" rx="2"/></svg><span>සාරාංශය</span></button>
+ <button data-page="people"><svg class="ui-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg><span>සැපයුම්කරුවන්</span></button>
+ <button data-page="leaves"><svg class="ui-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 4h-2a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2h-2"/><rect x="8" y="2" width="8" height="4" rx="1"/><path d="M8 12h8M8 16h5"/></svg><span>දලු සටහන්</span></button>
+ <button data-page="credit"><svg class="ui-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="3"/><path d="M3 9h18M16 15h2"/><path d="M6 5V4a2 2 0 0 1 2-2h10"/></svg><span>කඩ ණය</span></button>
+ <button data-page="deductions"><svg class="ui-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 6h18M6 6v15M18 6v15M8 11h8M8 16h8"/><path d="M9 3h6"/></svg><span>අඩුකිරීම්</span></button>
+ <button data-page="settle"><svg class="ui-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="2" width="14" height="20" rx="2"/><path d="M8 6h8M8 11h2M14 11h2M8 15h2M14 15h2M8 19h8"/></svg><span>බිල්පත් සැකසීම</span></button>
+ <button data-page="reports"><svg class="ui-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 3h8l4 4v13a1 1 0 0 1-1 1H7a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2Z"/><path d="M15 3v5h5M8 12h8M8 16h8"/></svg><span>වාර්තා / මුද්‍රණය</span></button>
+</nav>
+<main>
+<section id="home" class="page active">
+ <div class="section-intro"><div><div class="section-eyebrow">MONTHLY OVERVIEW</div><h2>අද සහ මාසයේ සාරාංශය</h2></div><span class="online-chip"><span class="chip-led"></span> LOCAL WORKSPACE</span></div>
+ <div class="cards"><div class="card metric-card metric-supplier"><div class="metric-top"><span class="metric-icon"><svg class="ui-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg></span><span class="metric-indicator">● LIVE VIEW</span></div><small>ලියාපදිංචි සැපයුම්කරුවන්</small><div class="value" id="nPeople">0</div><div class="metric-foot">GONAGAMUWA STORES</div></div><div class="card metric-card metric-leaves"><div class="metric-top"><span class="metric-icon"><svg class="ui-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 4c-8 0-14 2.5-14 11a5 5 0 0 0 5 5c8.5 0 11-6 9-16Z"/><path d="M4 21c3.5-6 7-9 12-12"/></svg></span><span class="metric-indicator">● LIVE VIEW</span></div><small>මෙම මාසයේ දලු (කි.ග්‍රෑ.)</small><div class="value" id="mKg">0</div><div class="metric-foot">GONAGAMUWA STORES</div></div><div class="card metric-card metric-gross"><div class="metric-top"><span class="metric-icon"><svg class="ui-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 3v18h18M7 16l4-5 3 2 6-8"/></svg></span><span class="metric-indicator">● LIVE VIEW</span></div><small>මෙම මාසයේ දලු මුදල</small><div class="value" id="mGross">රු. 0</div><div class="metric-foot">GONAGAMUWA STORES</div></div><div class="card metric-card metric-credit"><div class="metric-top"><span class="metric-icon"><svg class="ui-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="3"/><path d="M3 9h18M16 15h2"/><path d="M6 5V4a2 2 0 0 1 2-2h10"/></svg></span><span class="metric-indicator">● LIVE VIEW</span></div><small>මුළු ඉතිරි කඩ ණය</small><div class="value" id="debtTotal">රු. 0</div><div class="metric-foot">GONAGAMUWA STORES</div></div></div>
+ <div class="panel getting-started"><span class="start-icon"><svg class="ui-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 4h-2a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2h-2"/><rect x="8" y="2" width="8" height="4" rx="1"/><path d="M8 12h8M8 16h5"/></svg></span><div><b>ආරම්භ කිරීමට</b><p class="note">පළමුව සැපයුම්කරුවන් ලියාපදිංචි කරන්න. ඉන්පසු දිනපතා දලු කිලෝ සහ කඩ ණය ඇතුළත් කරන්න. බිල්පත් සැකසීමේදී මාසය, කිලෝවක මිල සහ බර අඩු කරන ප්‍රතිශතය ඇතුළත් කරන්න.</p></div></div>
+</section>
+
+<section id="people" class="page">
+  <h2>සැපයුම්කරුවන් ලියාපදිංචිය</h2><p class="section-lead">සැපයුම්කරුවන් පහසුවෙන් එක් කරන්න, සොයන්න සහ වෙනස් කරන්න.</p>
+  <div class="panel" id="personEditor">
+    <p class="supplier-edit-banner" id="personEditBanner" hidden>✏️ සැපයුම්කරුගේ විස්තර වෙනස් කරමින් සිටී. ID එක වෙනස් කළහොත් පැරණි දලු සහ ණය සටහන්ත් අලුත් ID එකට සම්බන්ධ වේ.</p>
+    <div class="grid">
+      <div><label for="pid">සැපයුම්කරුගේ ID</label><input id="pid" placeholder="TEA001"></div>
+      <div><label for="pname">නම</label><input id="pname" placeholder="නම ඇතුළත් කරන්න"></div>
+      <div><label for="phone">දුරකථන / WhatsApp අංකය</label><input id="phone" placeholder="07XXXXXXXX"></div>
+    </div>
+    <label class="welfare-toggle-row" for="personWelfare"><span><strong>💚 සුභසාධන අරමුදල</strong><small>මෙම සැපයුම්කරු අරමුදලේ සාමාජිකයෙක්ද?</small></span><input type="checkbox" id="personWelfare" class="welfare-checkbox" role="switch"><span class="welfare-switch" aria-hidden="true"></span><span id="personWelfareLabel">සම්බන්ධ නැහැ</span></label>
+    <div class="supplier-form-actions"><button type="button" id="personSaveBtn" onclick="addPerson()">සුරකින්න</button><button type="button" class="secondary" id="personCancelBtn" onclick="cancelPersonEdit()" hidden>අවලංගු කරන්න</button></div>
+  </div>
+  <div class="supplier-search-bar">
+    <div class="search-field"><label for="peopleSearch">🔎 ID එකෙන් හෝ නමෙන් සැපයුම්කරුවන් සොයන්න</label><input id="peopleSearch" type="search" placeholder="උදා: TEA001 / කමල්" autocomplete="off"></div>
+    <p class="note" id="peopleSearchCount" aria-live="polite"></p>
+  </div>
+  <div class="tablewrap"><table><thead><tr><th>ID</th><th>නම / සුභසාධන සාමාජිකත්වය</th><th>දුරකථන අංකය</th><th>වෙනස්කම්</th></tr></thead><tbody id="peopleRows"></tbody></table></div>
+</section>
+<section id="leaves" class="page">
+  <h2>දෛනික දලු සටහන්</h2><p class="section-lead">සැපයුම්කරුවෙක් තෝරා දිනපතා දලු ප්‍රමාණ සටහන් කරන්න.</p>
+  <div class="panel">
+    <div class="grid">
+      <div><label for="leafDate">දිනය</label><input type="date" id="leafDate"></div>
+      <div><label for="leafPerson">සැපයුම්කරු</label>
+        <div class="leaf-person-picker">
+          <div class="leaf-person-search-wrap"><input id="leafPersonSearch" type="search" placeholder="ID හෝ නම සොයන්න..." autocomplete="off" aria-label="දලු සැපයුම්කරු ID හෝ නමෙන් සොයන්න"><button type="button" id="leafPersonClear" class="secondary" title="සියලු සැපයුම්කරුවන් පෙන්වන්න">මකන්න ✕</button></div>
+          <select id="leafPerson" aria-label="සැපයුම්කරු තෝරන්න"></select>
+          <span class="leaf-match-count" id="leafMatchCount" aria-live="polite"></span>
+        </div>
+      </div>
+      <div><label for="leafKg">දලු ප්‍රමාණය (කි.ග්‍රෑ.)</label><input type="number" min="0" step=".01" id="leafKg"></div>
+    </div>
+    <div class="leaf-actions">
+      <button type="button" onclick="addLeaf()">දලු සටහන එක් කරන්න</button>
+      <button type="button" id="sendWhatsappBtn" class="whatsapp-btn" disabled hidden aria-haspopup="dialog" aria-controls="whatsappPreviewDialog" title="දලු ප්‍රමාණයක් ඇතුළත් කරන්න">💬 WhatsApp යවන්න</button>
+    </div>
+    <p class="note leaf-whatsapp-note" id="leafWhatsappHint" aria-live="polite">දලු ප්‍රමාණය ඇතුළත් කර WhatsApp පණිවිඩයක් සකස් කළ හැකියි. සටහන Save කිරීමට වෙනම බොත්තම භාවිත කරන්න. අවසානයේ Send ඔබන්නේ ඔබයි.</p>
+  </div>
+  <div class="panel sheet-panel">
+    <p id="sheetLastAdded" class="sheet-last-added" role="status" aria-live="polite" hidden></p>
+    <div class="sheet-toolbar">
+      <div class="sheet-month-picker">
+        <button type="button" class="secondary sheet-month-arrow" id="sheetPrevMonth" aria-label="පසුගිය මාසයට යන්න">‹</button>
+        <div><label for="sheetMonth">පෙන්වන මාසය</label><input type="month" id="sheetMonth"></div>
+        <button type="button" class="secondary sheet-month-arrow" id="sheetNextMonth" aria-label="ඊළඟ මාසයට යන්න">›</button>
+      </div>
+      <div class="sheet-stat"><strong id="sheetMonthTitle"></strong><small id="sheetMonthSummary"></small></div>
+    </div>
+    <div class="sheet-heading"><div><h3>මාසික දලු ෂීට් එක</h3><p class="note">වම් පැත්තේ ID සහ නම · තෝරාගත් කෙනාගේ පේළිය කොළ පාටින් · අද දිනය නිල් පාටින්. වගුවේ දින 01–31 එම පිළිවෙළටම තියෙනවා. මේ මාසය තෝරලා තිබුණොත් අද දවසේ මුල් තීරුව “එකතුව” ළඟට පෙනෙන තුරු වගුව ඉබේම පැත්තට Scroll වෙනවා. අමතර අද තීරුවක් නැහැ.</p></div>
+      <div class="sheet-page-controls" id="sheetPaginationTop"></div>
+    </div>
+    <div class="sheet-tablewrap" role="region" aria-label="මාසික දලු ෂීට් එක" tabindex="0">
+      <table class="sheet-table" dir="ltr">
+        <thead id="sheetHead"></thead>
+        <tbody id="sheetRows"></tbody>
+      </table>
+    </div>
+    <div class="sheet-bottom"><span class="note" id="sheetPageInfo"></span><div class="sheet-page-controls" id="sheetPaginationBottom"></div></div>
+    <section id="leafDayDetails" class="sheet-details" hidden aria-label="දෛනික සටහන් විස්තර"></section>
+  </div>
+</section>
+<section id="credit" class="page billing-page credit-page">
+  <div class="billing-heading">
+    <div><span class="billing-eyebrow"><span class="billing-dot"></span> SHOP CREDIT LEDGER</span><h2>කඩ ණය කළමනාකරණය</h2><p>බිල තහවුරු කරන දවස දක්වා ඇති ණය ස්වයංක්‍රීයව එකතු වේ. තහවුරු කළ බිලෙන් හිලව් කළ මුදල අඩු වී, ඉන්පසු ලැබෙන ණය ඊළඟ බිලට යයි.</p></div>
+    <span class="billing-preview-label">🌿 GONAGAMUWA STORES</span>
+  </div>
+  <div class="panel billing-supplier-panel credit-select-panel">
+    <div class="billing-section-label"><span class="billing-step">01</span><div><h3>මාසය සහ සැපයුම්කරු තෝරන්න</h3><small>මුලින් මාසය තෝරා ID / නමෙන් සොයන්න, නැත්නම් ලැයිස්තුවෙන් තෝරන්න.</small></div></div>
+    <div class="credit-toolbar-grid">
+      <div><label for="creditMonth">පෙන්වන මාසය</label><input id="creditMonth" type="month" aria-label="ණය මාසය"></div>
+      <div class="billing-search-box credit-search-box"><label for="creditSupplierSearch">🔎 ID / නමෙන් සොයන්න</label><input id="creditSupplierSearch" type="search" placeholder="උදා: TEA001 / කමල්" autocomplete="off" aria-controls="creditSearchResults"><div id="creditSearchResults" class="billing-search-results" role="listbox" aria-label="ණය සැපයුම්කරු සෙවුම් ප්‍රතිඵල" hidden></div></div>
+      <div><label for="creditPerson">හෝ ලැයිස්තුවෙන් තෝරන්න</label><select id="creditPerson"><option value="">— සැපයුම්කරුවෙක් තෝරන්න —</option></select></div>
+    </div>
+    <div id="creditChosenPerson" class="billing-selected" role="status" aria-live="polite" hidden></div>
+  </div>
+  <div id="creditEmpty" class="billing-empty-state"><span class="billing-empty-icon" aria-hidden="true">▤</span><h3>කඩ ණය විස්තර බැලීමට සැපයුම්කරුවෙක් තෝරන්න</h3><p>ණය ගනුදෙනු, මුදල් ආපසු ගෙවීම් සහ ඊළඟ මාසයට ගෙනයන ශේෂය මෙහි පෙන්වයි.</p></div>
+  <div id="creditWorkspace" hidden>
+    <div class="panel credit-entry-panel">
+      <div class="billing-section-label"><span class="billing-step">02</span><div><h3>ණය / ආපසු ගෙවීමක් එක් කරන්න</h3><small>මෙහි ඇතුළත් කරන සටහන් තෝරාගත් සැපයුම්කරුට පමණක් අදාළ වේ.</small></div></div>
+      <div class="grid credit-entry-grid">
+        <div><label for="creditDate">දිනය</label><input type="date" id="creditDate"></div>
+        <div><label for="creditType">ගනුදෙනු වර්ගය</label><select id="creditType"><option value="debt">අද ලබාගත් ණය</option><option value="repay">මුදල් ආපසු ගෙවීම</option><option value="adjust">ණය සංශෝධනය (+)</option></select></div>
+        <div><label for="creditAmount">මුදල (රු.)</label><input type="number" min="0" step="0.01" inputmode="decimal" id="creditAmount" placeholder="0.00"></div>
+        <div><label for="creditNote">සටහන / හේතුව</label><input id="creditNote" placeholder="කෙටි විස්තරයක්"></div>
+      </div>
+      <div class="credit-submit-row"><button type="button" onclick="addCredit()">+ ගනුදෙනුව සුරකින්න</button><span id="creditRecordNotice" class="note" role="status" aria-live="polite"></span></div>
+    </div>
+    <div class="panel billing-preview credit-preview">
+      <div class="billing-preview-header"><div><span class="billing-eyebrow">MONTHLY CREDIT PREVIEW</span><h3>මාසික ණය සාරාංශය</h3><p id="creditPreviewIdentity"></p></div><span class="billing-draft-badge">පෙරදසුන / PREVIEW</span></div>
+      <div class="billing-mini-stats credit-stats">
+        <div><small>ඉදිරියට ගෙන ආ ණය *</small><strong id="creditStatOpening">රු. 0.00</strong></div>
+        <div><small>අදාළ කාලයේ අලුත් ණය</small><strong id="creditStatNew">රු. 0.00</strong></div>
+        <div><small>තහවුරු කිරීමට පෙර ණය *</small><strong id="creditStatClosing">රු. 0.00</strong></div>
+      </div>
+      <div class="billing-table-wrap"><table class="billing-table credit-summary-table"><thead><tr><th scope="col">විස්තරය</th><th scope="col">පැහැදිලි කිරීම</th><th scope="col">මුදල</th></tr></thead><tbody id="creditSummaryRows"></tbody></table></div>
+      <div class="credit-carry-note" id="creditCarryInfo" role="status" aria-live="polite"></div>
+      <p class="billing-note">* තහවුරු කළ බිල්වල සටහන් කර ඇති ණය හිලව් පමණක් අඩු කෙරේ. තහවුරු නොකළ අලුත් බිල්වල ගණන් පෙරදසුනක් පමණයි. කඩ ණය දත්ත වෙනස් කිරීමට පෙර Backup එකක් ගන්න.</p>
+      <details class="credit-history"><summary>අදාළ ණය ගනුදෙනු බලන්න / මකන්න <span id="creditRecordCount"></span></summary><div class="tablewrap"><table><thead><tr><th>දිනය</th><th>වර්ගය</th><th>මුදල</th><th>සටහන</th><th>ක්‍රියාව</th></tr></thead><tbody id="creditRows"></tbody></table></div></details>
+    </div>
+  </div>
+</section>
+<section id="deductions" class="page billing-page deduction-page">
+  <div class="billing-heading"><div><span class="billing-eyebrow"><span class="billing-dot"></span> DEDUCTIONS LEDGER</span><h2>අඩුකිරීම්</h2><p>තේ කුඩු, වාරික වශයෙන් ගෙවන පොහොර, ඩොලමයිට්, කෘෂි රසායන සහ බැංකු ණය වෙන වෙනම සටහන් කරන්න. සුභසාධනය මාසයට පොදු මුදලක් ලෙස සකස් කරන්න. බිල තහවුරු වනතුරු ගනුදෙනු එකතු වේ.</p></div><span class="billing-preview-label">🌿 GONAGAMUWA STORES</span></div>
+  <div class="deduction-tabs" role="tablist" aria-label="අඩුකිරීම් වර්ග">
+    <button type="button" class="deduction-tab is-active" data-deduction-type="teaPowder" role="tab" aria-selected="true">🍃 තේ කුඩු</button>
+    <button type="button" class="deduction-tab" data-deduction-type="fertilizer" role="tab" aria-selected="false">🌱 පොහොර</button>
+    <button type="button" class="deduction-tab" data-deduction-type="dolomite" role="tab" aria-selected="false">◈ ඩොලමයිට්</button>
+    <button type="button" class="deduction-tab" data-deduction-type="chemicals" role="tab" aria-selected="false">✳ කෘෂි රසායන</button>
+    <button type="button" class="deduction-tab" data-deduction-type="bank" role="tab" aria-selected="false">▤ බැංකු ණය වාරික</button>
+    <button type="button" class="deduction-tab" data-deduction-type="welfare" role="tab" aria-selected="false">💚 සුභසාධන</button>
+  </div>
+  <div class="panel billing-supplier-panel deduction-select-panel">
+    <div class="grid deduction-toolbar-grid">
+      <div><label for="deductionMonth">බිල්පතට අදාළ මාසය</label><input id="deductionMonth" type="month"></div>
+      <div id="deductionSearchWrap" class="billing-search-box deduction-search-box"><label for="deductionSupplierSearch">🔎 සැපයුම්කරු ID / නමෙන් සොයන්න</label><input id="deductionSupplierSearch" type="search" placeholder="උදා: TEA001 / කමල්" autocomplete="off" aria-controls="deductionSearchResults"><div id="deductionSearchResults" class="billing-search-results" role="listbox" hidden></div></div>
+      <div id="deductionSupplierWrap"><label for="deductionPerson">හෝ ලැයිස්තුවෙන් තෝරන්න</label><select id="deductionPerson"><option value="">— සැපයුම්කරුවෙක් තෝරන්න —</option></select></div>
+    </div>
+    <div id="deductionSelected" class="billing-selected" hidden></div>
+    <p id="welfareMembershipNotice" class="welfare-membership-notice" hidden></p>
+  </div>
+  <!-- Welfare is a single monthly rate for ALL registered members; no supplier selection. -->
+  <div id="welfareGlobalWorkspace" hidden>
+    <div class="panel deduction-entry-panel">
+      <div class="billing-section-label"><span class="billing-step">💚</span><div><h3>මාසික පොදු සුභසාධන අඩුකිරීම</h3><small>සාමාජිකයන් සියලුදෙනාට එකම මාසික මුදලක්. සාමාජිකයෙකු තෝරාගන්න අවශ්‍ය නැහැ.</small></div></div>
+      <p class="welfare-global-lead">ඉහළින් මාසය තෝරලා, පොදු මුදල සහ විස්තරය ඇතුළත් කරන්න. මුදල සුරැකූ ගමන් සාමාජිකයන්ගේ තහවුරු නොකළ බිල්පත් සැකසීමේ පෙරදසුනටත්, අවසාන බිලේ “වෙනත්” පේළියටත් අදාළ වේ. මුදලක් ඇතුළත් නොකළ මාසයක අලුත් ගාස්තුවක් නැහැ.</p>
+      <div class="grid deduction-entry-grid">
+        <div><label for="welfareGlobalAmount">මාසයේ පොදු මුදල (රු.)</label><input id="welfareGlobalAmount" type="number" min="0.01" max="1000000000" step="0.01" inputmode="decimal" placeholder="උදා: 250.00"></div>
+        <div class="welfare-note-field"><label for="welfareGlobalNote">විස්තරය</label><input id="welfareGlobalNote" type="text" maxlength="300" placeholder="උදා: වාර්ෂික සුභසාධන අරමුදල් එකතුව"></div>
+      </div>
+      <div class="deduction-entry-actions"><button id="welfareGlobalSave" type="button">💚 මාසික ගාස්තුව සුරකින්න</button><button id="welfareGlobalDelete" type="button" class="secondary" hidden>මෙම මාසයේ ගාස්තුව ඉවත් කරන්න</button><span id="welfareGlobalMessage" class="note" role="status" aria-live="polite"></span></div>
+      <p id="welfareGlobalLocked" class="welfare-membership-notice" hidden></p>
+      <p id="welfareLegacyNotice" class="welfare-membership-notice welfare-global-warning" hidden></p>
+    </div>
+    <div class="panel billing-preview welfare-history-panel">
+      <div class="welfare-global-head"><h3>💚 සුභසාධන මාසික සාරාංශය</h3><span id="welfareGlobalMonthLabel" class="billing-draft-badge"></span></div>
+      <div class="welfare-month-summary"><div class="welfare-month-stat"><small>සාමාජිකයන්</small><strong id="welfareMemberCount">0</strong></div><div class="welfare-month-stat"><small>එක් සාමාජිකයෙකුට</small><strong id="welfareMemberRate">රු. 0.00</strong></div><div class="welfare-month-stat"><small>සාමාජිකයන් සියල්ලන්ට (ඇස්තමේන්තුව)</small><strong id="welfareGroupTotal">රු. 0.00</strong></div></div>
+      <p class="welfare-global-lead">මෙම එකතුව සාමාජික සංඛ්‍යාව × පොදු ගාස්තුවයි. තහවුරු නොකළ බිල්පත්වලටත් අඩුකිරීම වහාම ගණනය වේ. තහවුරු කළ බිල්පත්වල කලින් සුරැකුණු ගණන් වෙනස් නොවේ.</p>
+      <div class="credit-history"><div class="tablewrap"><table><thead><tr><th>මාසය</th><th>පොදු මුදල</th><th>විස්තරය</th><th>තත්වය</th></tr></thead><tbody id="welfareMonthRows"></tbody></table></div></div>
+    </div>
+  </div>
+  <div id="deductionEmpty" class="billing-empty-state"><span class="billing-empty-icon">▤</span><h3>සැපයුම්කරුවෙක් තෝරන්න</h3><p>ඉන්පසු අදාළ වර්ගයේ අඩුකිරීම් එකතු කරලා මාසික සාරාංශය බලන්න.</p></div>
+  <div id="deductionWorkspace" hidden>
+    <div class="panel deduction-entry-panel">
+      <div class="billing-section-label"><span class="billing-step">+</span><div><h3 id="deductionEntryTitle">තේ කුඩු අඩුකිරීම</h3><small>තහවුරු කළ බිලකට අදාළ ගනුදෙනු වෙනස් කළ නොහැක.</small></div></div>
+      <div class="grid deduction-entry-grid">
+        <div id="deductionDateWrap"><label for="deductionDate">ගනුදෙනු දිනය</label><input id="deductionDate" type="date"></div>
+        <div id="deductionInstallmentWrap" hidden><label for="deductionInstallment">ගෙවන්න තෝරාගත් වාරික ගණන</label><select id="deductionInstallment"><option value="1">1 වාරිකයක්</option><option value="2">2 වාරික</option><option value="3" selected>3 වාරික</option><option value="4">4 වාරික</option><option value="5">5 වාරික</option><option value="6">6 වාරික</option><option value="7">7 වාරික</option><option value="8">8 වාරික</option><option value="9">9 වාරික</option><option value="10">10 වාරික</option><option value="11">11 වාරික</option><option value="12">12 වාරික</option></select></div>
+        <div><label for="deductionAmount" id="deductionAmountLabel">අඩු කරන මුදල (රු.)</label><input id="deductionAmount" type="number" min="0.01" step="0.01" inputmode="decimal" placeholder="0.00"></div>
+        <div><label for="deductionNote">සටහන</label><input id="deductionNote" placeholder="අවශ්‍ය නම් විස්තරයක්"></div>
+      </div>
+      <p id="fertilizerPlanHint" class="fertilizer-plan-hint" hidden aria-live="polite"></p>
+      <div class="deduction-entry-actions"><button id="deductionAddBtn" type="button">+ අඩුකිරීම සුරකින්න</button><span id="deductionMessage" class="note" role="status" aria-live="polite"></span></div>
+    </div>
+    <div class="panel billing-preview deduction-preview">
+      <div class="billing-preview-header"><div><span class="billing-eyebrow">DEDUCTION PREVIEW</span><h3 id="deductionPreviewTitle">තේ කුඩු — ගිණුම් සාරාංශය</h3><p id="deductionIdentity"></p></div><span id="deductionStatus" class="billing-draft-badge">පෙරදසුන</span></div>
+      <div class="billing-mini-stats deduction-stats"><div><small>ඉදිරියට ගෙන ආ ඉතිරිය</small><strong id="deductionOpening">රු. 0.00</strong></div><div><small>මෙම කාලයේ අඩුකිරීම්</small><strong id="deductionAdded">රු. 0.00</strong></div><div><small>බිලෙන් හිලව්ව / ඉතිරිය</small><strong id="deductionApplied">රු. 0.00</strong></div></div>
+      <div class="billing-table-wrap"><table class="billing-table"><thead><tr><th>විස්තරය</th><th>කාලය</th><th>මුදල</th></tr></thead><tbody id="deductionSummaryRows"></tbody></table></div>
+      <div class="credit-carry-note" id="deductionPeriodNote"></div>
+      <details class="credit-history" open><summary>අදාළ අඩුකිරීම් සටහන් <span id="deductionRecordCount"></span></summary><div class="tablewrap"><table><thead><tr><th id="deductionRecordDateHead">දිනය</th><th>වර්ගය</th><th id="deductionRecordAmountHead">මුදල</th><th>සටහන</th><th>ක්‍රියාව</th></tr></thead><tbody id="deductionRows"></tbody></table></div></details>
+      <section id="fertilizerProgressWrap" class="fertilizer-repayment-panel" hidden aria-labelledby="fertilizerProgressHeading">
+        <div class="fertilizer-repayment-heading"><div><span class="billing-eyebrow">CONFIRMED PAYMENTS</span><h3 id="fertilizerProgressHeading">🌱 පොහොර ගෙවීම් සාරාංශය</h3><p id="fertilizerProgressSubtitle">තහවුරු කළ බිල් මත පදනම් වේ.</p></div><span class="fertilizer-repayment-check">✓ බිල් තහවුරුයි</span></div>
+        <div class="fertilizer-repayment-stats">
+          <div><small>පොහොර මුළු මුදල</small><strong id="fertilizerProgressTotal">රු. 0.00</strong></div>
+          <div><small>ගෙවූ වාරික ගණන</small><strong id="fertilizerProgressPaidCount">0</strong></div>
+          <div><small>ගෙවූ මුදල</small><strong id="fertilizerProgressPaidAmount">රු. 0.00</strong></div>
+          <div><small>ගෙවීමට ඇති වාරික ගණන</small><strong id="fertilizerProgressRemainingCount">0</strong></div>
+          <div><small>ගෙවීමට ඇති මුදල</small><strong id="fertilizerProgressRemainingAmount">රු. 0.00</strong></div>
+        </div>
+        <div class="fertilizer-repayment-table-wrap"><table class="fertilizer-repayment-table"><thead><tr><th>පොහොර ගත් මාසය / විස්තරය</th><th>මුළු මුදල</th><th>ගෙවූ වාරික</th><th>ගෙවූ මුදල</th><th>ඉතිරි වාරික</th><th>ඉතිරි මුදල</th></tr></thead><tbody id="fertilizerProgressRows"></tbody></table></div>
+        <p id="fertilizerProgressNote" class="fertilizer-repayment-note">ගෙවූ වාරික ලෙස ගණන් ගන්නේ සම්පූර්ණයෙන් හිලව් වූ වාරික පමණයි. කොටසක් හිලව් වුණොත් එම මුදල ගෙවූ මුදලට ඇතුළත් වෙනවා; වාරිකය තවම ඉතිරි ලෙස පෙන්වනවා.</p>
+      </section>
+    </div>
+  </div>
+</section>
+<section id="settle" class="page billing-page">
+  <div class="billing-heading">
+    <div><span class="billing-eyebrow"><span class="billing-dot"></span> MONTHLY BILLING</span><h2>බිල්පත් සැකසීම</h2><p>මාසික දලු මිල, අඩු කරන බරේ % සහ ශුද්ධ කිලෝවකට ප්‍රවාහන ගාස්තුව සකස් කර, සැපයුම්කරුගේ ගිණුම බලන්න.</p></div>
+    <span class="billing-preview-label">🌿 GONAGAMUWA STORES</span>
+  </div>
+  <div class="panel billing-settings-panel">
+    <div class="billing-section-label"><span class="billing-step">01</span><div><h3>මාසික බිල්පත් සැකසුම්</h3><small>මෙම සැකසුම් තෝරාගත් මාසයේ සියලු සැපයුම්කරුවන්ට පොදුවේ අදාළ වේ.</small></div></div>
+    <div class="grid billing-config-grid">
+      <div><label for="settleMonth">බිල්පත් මාසය</label><input id="settleMonth" type="month"></div>
+      <div><label for="rate">දලු කිලෝවක මිල (රු.)</label><div class="bill-field-affix"><input id="rate" type="number" min="0.01" step="0.01" inputmode="decimal" placeholder="උදා: 184.00"><span>රු.</span></div></div>
+      <div><label for="deductPercent">සම්පූර්ණ දලු බරින් අඩු කරන ප්‍රතිශතය</label><div class="bill-field-affix"><input id="deductPercent" type="number" min="0" max="100" step="0.01" inputmode="decimal" value="0"><span>%</span></div></div>
+      <div><label for="transportRate">ප්‍රවාහන ගාස්තුව — ශුද්ධ කිලෝවකට (රු.)</label><div class="bill-field-affix"><input id="transportRate" type="number" min="0" max="10000000" step="0.01" inputmode="decimal" placeholder="උදා: 3.50" aria-describedby="transportInfo"><span>රු./kg</span></div></div>
+          </div>
+    <p id="transportInfo" class="billing-note">ප්‍රවාහන ගාස්තුව = <strong>(සම්පූර්ණ දලු බර − % අඩු කළ බර) × රු./kg</strong>. මෙය දලු මුදලෙන් අඩු කර ඉතිරි මුදලෙන් කඩ ණය හිලව් කරයි. අලුත් මාසයක මුල් අගය රු. 3.50/kg; කලින් සුරැකුණු මාස සඳහා අගය වෙනස් කරන්නේ නැහැ.</p>
+    <p id="cutoffInfo" class="billing-note">දලු: තෝරාගත් මාසයේ 01 සිට මාසයේ අවසන් දිනය දක්වා. ණය: මෙයට පෙර තහවුරු කළ බිලෙන් පසුව අද දක්වා ඇති සියලුම ණය හා ආපසු ගෙවීම්. පළමු බිලට පෙර සියලුම පැරණි ණය ඇතුළත් වේ. තහවුරු කරන දිනය ස්වයංක්‍රීයයි; දින තෝරන්න අවශ්‍ය නැහැ.</p>
+    <div class="billing-configuration-foot"><span id="billConfigNotice" role="status" aria-live="polite">මෙම මාසයේ සැකසුම් Browser එකේ ස්වයංක්‍රීයව සුරැකේ.</span><span>කි.ග්‍රෑ. සහ රුපියල් දශම ස්ථාන 2කට</span></div>
+  </div>
+  <div class="panel billing-supplier-panel">
+    <div class="billing-section-label"><span class="billing-step">02</span><div><h3>සැපයුම්කරු තෝරන්න</h3><small>ID හෝ නම Search කරලා හෝ ලැයිස්තුවෙන් තෝරන්න.</small></div></div>
+    <div class="billing-supplier-grid">
+      <div class="billing-search-box">
+        <label for="billSupplierSearch">🔎 ID / නමෙන් සොයන්න</label>
+        <input id="billSupplierSearch" type="search" placeholder="උදා: TEA001 / කමල්" autocomplete="off" aria-controls="billSearchResults" aria-label="බිල්පත සඳහා සැපයුම්කරු සොයන්න">
+        <div id="billSearchResults" class="billing-search-results" role="listbox" aria-label="සෙවුම් ප්‍රතිඵල" hidden></div>
+      </div>
+      <div><label for="settlePerson">හෝ ලැයිස්තුවෙන් තෝරන්න</label><select id="settlePerson"><option value="">— සැපයුම්කරුවෙක් තෝරන්න —</option></select></div>
+    </div>
+    <div id="billChosenPerson" class="billing-selected" role="status" aria-live="polite" hidden></div>
+  </div>
+  <div id="billPreviewEmpty" class="billing-empty-state"><span class="billing-empty-icon" aria-hidden="true">▤</span><h3>බිල්පත බලන්න සැපයුම්කරුවෙක් තෝරන්න</h3><p>තෝරාගත් සැපයුම්කරුගේ මාසික දලු බර, අඩු කළ බර සහ ණය විස්තර මෙතැනට ස්වයංක්‍රීයව එයි.</p></div>
+  <div id="billPreview" class="panel billing-preview" hidden>
+    <div class="billing-preview-header"><div><span class="billing-eyebrow">LIVE BILL PREVIEW</span><h3>මාසික දලු ගිණුම</h3><p id="billPreviewIdentity"></p></div><span class="billing-draft-badge">පෙරදසුන / DRAFT</span></div>
+    <div class="settlement-period-banner"><div><small>දලු කාලය</small><strong id="billTeaPeriod">—</strong></div><div><small>ණය කාලය</small><strong id="billCreditPeriod">—</strong></div><div><small>බිලේ තත්ත්වය</small><strong id="billCloseStatus">පෙරදසුන</strong></div></div>
+    <div class="billing-mini-stats">
+      <div><small>සම්පූර්ණ දලු බර</small><strong id="billStatTotal">—</strong></div>
+      <div><small>අඩු කළ බර</small><strong id="billStatDeduct">—</strong></div>
+      <div><small>ශුද්ධ දලු බර</small><strong id="billStatNet">—</strong></div>
+    </div>
+    <div id="billWelfareLive" class="bill-welfare-live" role="status" aria-live="polite"><div><strong id="billWelfareStatus">💚 සුභසාධන ගාස්තුව</strong><small id="billWelfareDescription"></small></div><strong id="billWelfareValue">—</strong></div>
+    <div class="billing-table-wrap"><table class="billing-table"><thead><tr><th scope="col">විස්තරය</th><th scope="col">ගණනය / අගය</th><th scope="col">ප්‍රමාණය / මුදල</th></tr></thead><tbody id="billPreviewRows"></tbody></table></div>
+    <div class="billing-totals"><div><small>සැපයුම්කරුට ගෙවිය යුතු මුදල</small><strong id="billPayable">—</strong></div><div><small>ණය ඉතිරිවීම (ඇත්නම්)</small><strong id="billCarry">—</strong></div></div>
+    <div class="settlement-actions"><button type="button" id="confirmBillBtn">✓ තෝරාගත් බිල තහවුරු කරන්න</button><button type="button" class="secondary" id="confirmAllBillsBtn">මෙම මාසයේ බිල් සියල්ල තහවුරු කරන්න</button><p class="billing-note" id="settlementActionNote" role="status" aria-live="polite"></p></div>
+    <p class="billing-note">බිල්පත තහවුරු කිරීමෙන් <b>කඩ ණය සහ අමතර අඩුකිරීම් හිලව්ව එක් වරක් පමණක් සටහන් කරයි.</b> ඉන්පසු එම බිලේ දලු සටහන්, කපා අවසන් කළ දිනය දක්වා ණය සටහන් සහ මාසික මිල/%, ප්‍රවාහන ගාස්තුව වෙනස් කළ නොහැක. අමතර අඩුකිරීම් සහ කඩ ණය හිලව්ව වෙන්ව ගණනය කරයි. කොමිස් තවම ගණනය කර නැහැ. මෙය Offline Browser දත්ත පමණයි.</p>
+  </div>
+</section>
+<!-- This entire page is view/print only: no edits, posts, deletions or storage writes. -->
+<section id="reports" class="page report-page billing-page" aria-label="වාර්තා පෙරදසුන සහ මුද්‍රණය">
+  <div class="billing-heading report-heading">
+    <div><span class="billing-eyebrow"><span class="billing-dot"></span> READ ONLY / PRINT CENTER</span>
+      <h2>වාර්තා / මුද්‍රණය</h2>
+      <p>පහුගිය මාසවල දලු ෂීට්, කඩ ණය හා වෙන වෙනම අඩුකිරීම් වාර්තා සහ බිල්පත් බලන්න හෝ මුද්‍රණය කරන්න. මෙතැනින් දත්ත වෙනස් කළ නොහැක.</p>
+    </div><span class="billing-preview-label">🌿 GONAGAMUWA STORES</span>
+  </div>
+  <div class="panel report-control-panel">
+    <div class="report-type-controls" role="group" aria-label="වාර්තා වර්ගය">
+      <button type="button" class="report-type-button is-active" data-report-mode="sheet" aria-pressed="true">▦ මාසික දලු ෂීට්</button>
+      <button type="button" class="report-type-button" data-report-mode="ledger" aria-pressed="false">▦ ණය / අඩුකිරීම් ෂීට්</button>
+      <button type="button" class="report-type-button" data-report-mode="bill" aria-pressed="false">▤ සැපයුම්කරුගේ බිල්පත</button>
+      <button type="button" class="report-type-button" data-report-mode="confirmed" aria-pressed="false">✓ තහවුරු කළ බිල්පත්</button>
+    </div>
+    <div id="reportLedgerControls" class="report-ledger-controls" hidden>
+      <div class="report-ledger-tab-label">වෙන් වෙන්ව වාර්තාව තෝරන්න</div>
+      <div class="report-ledger-types" role="group" aria-label="ණය සහ අඩුකිරීම් වාර්තා වර්ග">
+        <button class="report-ledger-type is-active" type="button" data-ledger-type="credit" aria-pressed="true">💳 කඩ ණය</button>
+        <button class="report-ledger-type" type="button" data-ledger-type="teaPowder" aria-pressed="false">🍃 තේ කුඩු</button>
+        <button class="report-ledger-type" type="button" data-ledger-type="fertilizer" aria-pressed="false">🌱 පොහොර</button>
+        <button class="report-ledger-type" type="button" data-ledger-type="dolomite" aria-pressed="false">◈ ඩොලමයිට්</button>
+        <button class="report-ledger-type" type="button" data-ledger-type="chemicals" aria-pressed="false">🧪 කෘෂි රසායන</button>
+        <button class="report-ledger-type" type="button" data-ledger-type="bank" aria-pressed="false">🏦 බැංකු ණය වාරික</button>
+        <button class="report-ledger-type" type="button" data-ledger-type="welfare" aria-pressed="false">💚 සුභසාධන</button>
+      </div>
+      <div class="report-ledger-search-row"><label for="reportLedgerSearch">🔎 සැපයුම්කරු ID / නම</label><input id="reportLedgerSearch" type="search" placeholder="නම හෝ ID එකක් සොයන්න (හිස් නම් සියලු දෙනා)" autocomplete="off"></div>
+    </div>
+    <div class="report-filters">
+      <div class="report-month-wrap"><label for="reportMonth">පෙන්වන මාසය</label><input type="month" id="reportMonth"></div>
+      <div id="reportPersonFilters" class="report-person-fields" hidden>
+        <div class="billing-search-box report-search-box"><label for="reportPersonSearch">🔎 ID / නමෙන් සොයන්න</label>
+          <input id="reportPersonSearch" type="search" placeholder="උදා: TEA001 / කමල්" autocomplete="off" aria-controls="reportSearchResults">
+          <div id="reportSearchResults" class="billing-search-results" role="listbox" aria-label="සැපයුම්කරු සෙවුම් ප්‍රතිඵල" hidden></div>
+        </div>
+        <div><label for="reportPerson">හෝ ලැයිස්තුවෙන් තෝරන්න</label><select id="reportPerson"><option value="">— සැපයුම්කරුවෙක් තෝරන්න —</option></select></div>
+      </div>
+    </div>
+    <div id="reportConfirmedPanel" class="confirmed-panel" hidden>
+      <div class="confirmed-panel-heading"><div><h3>✓ තහවුරු කළ බිල්පත් ලැයිස්තුව</h3><p>තෝරාගත් මාසයේ අගුළු දැමූ බිල්පත් පමණයි. එකක් තෝරලා අවසාන බිල බලන්න.</p></div><strong id="confirmedBillCount" class="confirmed-count">0</strong></div>
+      <div class="confirmed-list-filters"><label for="confirmedSearch">🔎 තහවුරු කළ බිල්පත් — ID / නමෙන් සොයන්න</label><input type="search" id="confirmedSearch" placeholder="උදා: TEA001 / කමල්" autocomplete="off"></div>
+      <div class="confirmed-list-scroll" role="region" aria-label="තහවුරු කළ බිල්පත් ලැයිස්තුව" tabindex="0">
+        <table class="confirmed-table"><thead><tr><th class="confirmed-select-col"><input id="confirmedSelectAll" type="checkbox" aria-label="සෙවුම් ප්‍රතිඵලවල පෙනෙන බිල් සියල්ල තෝරන්න" title="පෙන්වන බිල් සියල්ල තෝරන්න"></th><th>ID</th><th>සැපයුම්කරු</th><th>තහවුරු කළ දිනය</th><th>ශුද්ධ බර</th><th>ගෙවිය යුතු මුදල</th><th></th></tr></thead><tbody id="confirmedRows"></tbody></table>
+      </div>
+      <div class="confirmed-selection-toolbar"><span id="confirmedSelectionCount" role="status" aria-live="polite">තෝරාගත් බිල්: 0</span><button id="confirmedClearSelection" type="button" class="secondary" disabled>තේරීම් ඉවත් කරන්න</button></div>
+      <div class="confirmed-actions confirmed-selected-actions"><button id="reportPrintSelectedBtn" type="button" class="report-print-btn" disabled>🖨 තෝරාගත් බිල් Print / PDF</button><button id="reportDownloadSelectedBtn" type="button" class="secondary" disabled>⬇ තෝරාගත් බිල් Download (HTML)</button></div>
+      <div class="confirmed-actions confirmed-all-actions"><button id="reportPrintAllBtn" type="button" class="secondary">🖨 සියලු බිල් Print / Save PDF</button><button id="reportDownloadAllBtn" type="button" class="secondary">⬇ සියලු බිල් Download (HTML)</button></div>
+      <p class="note confirmed-note">එක් එක් බිල ඉදිරියේ ✓ ලකුණ දාන්න. වම් ඉහළ Checkbox එකෙන් දැන් සෙවුමට ගැළපෙන බිල් සියල්ල තෝරන්න පුළුවන්. තෝරාගත් බිල් පමණක් Print හෝ HTML Download කරන්න. PDF සඳහා Print → <b>Save as PDF</b> තෝරන්න. තනි බිලකට <b>ID_නම_මාසය_අවුරුද්ද.pdf</b> යන නම Browser එකට යෝජනා කරයි. මෙහිදී ගිණුම් දත්ත කිසිවක් වෙනස් නොවේ.</p>
+    </div>
+    <div id="reportBillingConfigHint" class="report-missing-config" role="status" aria-live="polite" hidden>
+      <div><strong>⚠️ මාසික බිල්පත් සැකසුම් පරීක්ෂා කරන්න</strong><p id="reportMissingConfigText"></p></div>
+      <button id="reportGoBillingBtn" type="button" class="secondary">බිල්පත් සැකසීමට යන්න</button>
+    </div>
+    <div class="report-control-bottom"><span class="note" id="reportStatus" role="status" aria-live="polite">දත්ත පෙරදසුන පමණයි.</span>
+      <label id="reportBillPaperSizeWrap" class="report-bill-paper-size" for="reportBillPaperSize" hidden>බිල්පත් කඩදාසිය
+        <select id="reportBillPaperSize" aria-label="බිල්පත් මුද්‍රණ ප්‍රමාණය"><option value="a5" selected>A5 — A4 බාගය</option><option value="a4">A4 — සම්පූර්ණ පිටුව</option><option value="a4two">A4 Landscape — එකම බිල පිටපත් 2ක්</option></select>
+      </label>
+      <button id="reportPrintBtn" type="button" class="report-print-btn" title="PDF ලෙස සුරකිද්දී ID, නම, මාසය සහ අවුරුද්ද ඇතුළත් filename එකක් යෝජනා වේ">🖨 මුද්‍රණය / PDF</button>
+    </div>
+  </div>
+  <div id="reportEmpty" class="billing-empty-state" hidden><span class="billing-empty-icon" aria-hidden="true">▤</span><h3>සැපයුම්කරුවෙක් තෝරන්න</h3><p>ID එකෙන් හෝ නමෙන් Search කරලා මාසික බිල්පත බලන්න.</p></div>
+  <article id="reportSheetPreview" class="panel report-paper report-sheet-paper" aria-label="දලු ෂීට් පෙරදසුන">
+    <div class="report-paper-header"><div><span class="report-paper-kicker">GONAGAMUWA STORES</span><h3>ගෝනගමුව ස්ටෝර්ස්</h3><p>මාසික තේ දලු ෂීට් — <strong id="reportSheetMonthTitle"></strong></p></div><span class="report-copy-tag">පෙරදසුන</span></div>
+    <div class="report-paper-subtitle"><span id="reportSheetSummary"></span><span>කිලෝ ග්‍රෑම් (kg)</span></div>
+    <div class="report-sheet-scroll" role="region" aria-label="සියලු සැපයුම්කරුවන්ගේ දලු සටහන්" tabindex="0">
+      <table class="report-sheet-table" dir="ltr"><thead id="reportSheetHead"></thead><tbody id="reportSheetRows"></tbody></table>
+    </div>
+    <p class="report-footnote">මෙය සුරැකී ඇති දලු සටහන්වලින් ස්වයංක්‍රීයව සකස් කළ පිටපතකි. දත්ත වෙනස් කිරීමට දලු සටහන් ටැබ් එක භාවිත කරන්න.</p>
+  </article>
+  <article id="reportLedgerPreview" class="panel report-paper report-sheet-paper report-ledger-paper" aria-label="ණය හා අඩුකිරීම් මාසික වාර්තාව" hidden>
+    <div class="report-paper-header"><div><span class="report-paper-kicker">GONAGAMUWA STORES</span><h3>ගෝනගමුව ස්ටෝර්ස්</h3><p><strong id="reportLedgerTitle">කඩ ණය</strong> — <strong id="reportLedgerMonthTitle"></strong></p></div><span class="report-copy-tag">මාසික වාර්තාව</span></div>
+    <div class="report-paper-subtitle"><span id="reportLedgerSummary"></span><span>මුදල් (රු.)</span></div>
+    <div class="report-sheet-scroll" role="region" aria-label="දිනෙන් දින ණය සහ අඩුකිරීම් සටහන්" tabindex="0">
+      <table class="report-sheet-table report-ledger-table" dir="ltr"><thead id="reportLedgerHead"></thead><tbody id="reportLedgerRows"></tbody></table>
+    </div>
+    <p id="reportLedgerNote" class="report-footnote"></p>
+  </article>
+  <article id="reportBillPreview" class="panel report-paper report-bill-paper tc-form" aria-label="අමු තේ දලු සැපයුම් මාසික බිල්පත" hidden>
+    <div class="tc-act-header">
+      <div class="tc-form-topline"><strong>වර්ෂ 1957 අංක 51 දරණ තේ පාලන පනත</strong><strong class="tc-reference">TC/18</strong></div>
+      <h3>බලපත්‍ර වෙළෙන්දකුට අමු තේ දලු බාරදෙන තැනැත්තා විසින් කරනු ලබන ප්‍රකාශය</h3>
+      <div class="tc-merchant-info">
+        <div><span>බලපත්‍ර වෙළෙන්දාගේ නම</span><strong>B.V.P. කරුණාරත්න</strong></div>
+        <div><span>ලියාපදිංචි අංකය</span><strong>R-2610</strong></div>
+        <div class="tc-info-wide"><span>දුරකථන</span><strong>076 5631586</strong></div>
+      </div>
+      <p class="tc-declaration">පහත සඳහන් කර ඇති අමු තේ දලු ප්‍රමාණය මෙම ප්‍රකාශ පත්‍රයේ ඉහත සඳහන් කර ඇති බලපත්‍රලත් අමු තේ දලු වෙළෙන්දාට සැපයූ බව මෙයින් ප්‍රකාශ කරමි.</p>
+    </div>
+    <div class="tc-supplier-info">
+      <div><span>අමු තේ දලු බාර දෙන තැනැත්තාගේ නම</span><strong id="reportBillSupplierName"></strong></div>
+      <div><span>සාමාජික අංකය / ID</span><strong id="reportBillSupplierId"></strong></div>
+      <div><span>දුරකථන / WhatsApp</span><strong id="reportBillSupplierPhone">—</strong></div>
+    </div>
+    <div class="tc-meta-info">
+      <span>අමු තේ දලු සැපයූ වර්ෂය හා මාසය: <strong id="reportBillMonthTitle"></strong></span>
+    </div>
+    <div class="tc-table-scroll">
+      <table class="tc-tea-table" aria-label="මාසික තේ දලු බර හා මුදල් වගුව">
+        <thead><tr><th>සැපයූ දලු බර<br>Kg</th><th>අඩු කළ බර<br>Kg</th><th>ශුද්ධ බර<br>Kg</th><th>1 Kg මිල<br>රු.</th><th>මුළු මුදල<br>රු. ශත</th></tr></thead>
+        <tbody><tr><td id="reportBillGivenKg">—</td><td id="reportBillDeductKg">—</td><td id="reportBillNetKg">—</td><td id="reportBillKgRate">—</td><td id="reportBillGross">—</td></tr></tbody>
+      </table>
+    </div>
+    <div class="tc-section-label">අඩු කිරීම්</div>
+    <div class="tc-table-scroll">
+      <table class="tc-deduction-table" aria-label="බිල්පතේ අඩු කිරීම්">
+        <thead><tr><th>අඩු කිරීම් විස්තරය</th><th>රු. ශත</th></tr></thead>
+        <tbody>
+          <tr><td>ප්‍රවාහන ගාස්තු</td><td id="reportBillTransportFee">—</td></tr>
+          <tr><td>තේ කුඩු</td><td id="reportBillTeaPowder">—</td></tr>
+        </tbody>
+        <tbody id="reportBillFertilizerRows"></tbody>
+        <tbody>
+          <tr><td>ඩොලමයිට්</td><td id="reportBillDolomite">—</td></tr>
+          <tr><td>කොමිස් 1%</td><td class="tc-unset">—</td></tr>
+          <tr class="tc-current-debt"><td>අත්තිකාරම් <small>(හිලව් කළ කඩ ණය)</small></td><td id="reportBillDebtAmount">—</td></tr>
+          <tr><td>කෘෂි රසායන</td><td id="reportBillChemicals">—</td></tr>
+          <tr><td>බැංකු ණය වාරික</td><td id="reportBillBank">—</td></tr>
+          <tr><td>වෙනත්</td><td id="reportBillWelfare"></td></tr>
+          <tr class="tc-total-deductions"><td>අඩු කිරීම් මුළු එකතුව</td><td id="reportBillKnownDeductions">—</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <details class="tc-credit-details"><summary>වාර්තාගත කඩ ණය ගණන් බලන්න</summary>
+      <div class="report-bill-table-wrap"><table class="report-bill-table"><thead><tr><th>විස්තරය</th><th>ගණනය / අගය</th><th>මුදල</th></tr></thead><tbody id="reportBillRows"></tbody></table></div>
+    </details>
+    <div class="tc-balance-row"><span>ශේෂය <small>(දැනට ඇතුළත් කළ අඩුකිරීම් අනුව)</small></span><strong id="reportBillPayable">—</strong></div>
+    <div class="tc-carry-row"><span>ඉදිරියට ගෙන යාමට ඇති කඩ ණය <small>(ඇත්නම්)</small></span><strong id="reportBillCarry">—</strong></div><div class="tc-carry-row"><span>ඉදිරියට ගෙන යාමට ඇති අනෙකුත් අඩුකිරීම් <small>(ඇත්නම්)</small></span><strong id="reportBillExtraCarry">—</strong></div>
+    <div class="tc-payment-info"><span>ඉතිරි මුදල් බාර ගැනීම:</span><strong>චෙක්පත් / මුදල්</strong><span class="tc-empty-line" aria-label="ගෙවීම් ක්‍රමය තවම සටහන් කර නැහැ">________________________</span></div>
+    <div class="tc-bill-footer"><div><span>දිනය:</span> <strong>—</strong></div><div><span>බිල් අංකය:</span> <strong>—</strong></div></div>
+    <div class="tc-printer-credit">Created by Methum TP - 0762465427</div>
+    <p id="reportBillMissingRate" class="report-warning" hidden>මෙම මාසයට කිලෝවක මිල තවම ඇතුළත් කර නැහැ. ගෙවිය යුතු මුදල ගණනය කළ නොහැක.</p>
+  </article>
+  <div id="reportBulkPreview" aria-label="තහවුරු කළ බිල්පත් එකවර මුද්‍රණය" hidden></div>
+</section>
+</main>
+
+<div id="settingsBackdrop" class="settings-backdrop" aria-hidden="true"></div>
+<aside id="settingsPanel" class="settings-panel" role="dialog" aria-modal="true" aria-label="සැකසුම්" aria-hidden="true" inert>
+  <div class="settings-panel-header">
+    <div class="settings-heading-wrap">
+      <span class="settings-heading-icon" aria-hidden="true"><svg class="ui-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06-1.8 1.8-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V20h-2.55v-.09a1.65 1.65 0 0 0-1.05-1.53 1.65 1.65 0 0 0-1.81.34l-.06.06-1.8-1.8.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H4v-2.55h.09a1.65 1.65 0 0 0 1.53-1.05 1.65 1.65 0 0 0-.34-1.81l-.06-.06 1.8-1.8.06.06a1.65 1.65 0 0 0 1.82.33 1.65 1.65 0 0 0 1-1.51V4h2.55v.09a1.65 1.65 0 0 0 1.05 1.53 1.65 1.65 0 0 0 1.81-.34l.06-.06 1.8 1.8-.06.06a1.65 1.65 0 0 0-.33 1.82 1.65 1.65 0 0 0 1.51 1H20v2.55h-.09A1.65 1.65 0 0 0 18.4 15z"/></svg></span>
+      <div><div class="settings-eyebrow">GONAGAMUWA STORES</div><h2>සැකසුම්</h2></div>
+    </div>
+    <button id="settingsClose" type="button" aria-label="සැකසුම් වසන්න" title="වසන්න">&times;</button>
+  </div>
+  <div class="settings-content">
+    <div class="settings-section-label">දත්ත</div>
+    <button id="settingsDataOpen" type="button" class="settings-data-option" aria-controls="settingsDataView" aria-expanded="false">
+      <span class="settings-data-icon" aria-hidden="true"><svg class="ui-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M3 5v14a9 3 0 0 0 18 0V5M3 12a9 3 0 0 0 18 0"/></svg></span>
+      <span class="settings-data-copy"><strong>දත්ත ආරක්ෂාව / මුද්‍රණය</strong><small>Backup, Restore සහ Print / PDF</small></span>
+      <span class="settings-data-chevron" aria-hidden="true">›</span>
+    </button>
+    <div class="settings-section-label">පෙනුම</div>
+    <div class="settings-option">
+      <div class="settings-option-copy"><div class="settings-option-title">🌗 තේමාව</div><div class="settings-option-hint">Dark / Light Mode මාරු කරන්න</div></div>
+      <button class="theme-toggle" type="button" role="switch" aria-checked="false" aria-label="Dark Mode සක්‍රිය කරන්න" title="Dark / Light Mode මාරු කරන්න"><span class="theme-icon" aria-hidden="true">🌙</span><span class="theme-state">Dark</span><span class="theme-track" aria-hidden="true"><span class="theme-thumb"></span></span></button>
+    </div>
+    <div class="settings-section-label">ගිණුම</div>
+    <div class="settings-option settings-logout-option">
+      <div class="settings-option-copy"><div class="settings-option-title">පරිපාලක ගිණුම</div><div class="settings-option-hint">මෙම උපකරණයෙන් ඉවත් වන්න</div></div>
+      <button id="logoutBtn" type="button"><svg class="ui-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="10" width="14" height="12" rx="3"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg><span>ඉවත් වන්න</span></button>
+    </div>
+  </div>
+  <div class="settings-panel-footer"><span class="settings-footer-dot"></span> Created By Methuuum</div>
+  <section id="settingsDataView" class="settings-data-view" role="region" aria-labelledby="settingsDataTitle" aria-hidden="true" inert>
+    <div class="settings-data-head">
+      <button id="settingsDataBack" class="settings-data-back" type="button" aria-label="පසුපසට — සැකසුම්" title="සැකසුම් වෙත ආපසු">‹ <span>ආපසු</span></button>
+      <button id="settingsDataClose" class="settings-data-close" type="button" aria-label="සැකසුම් වසන්න" title="වසන්න">&times;</button>
+    </div>
+    <div class="settings-data-scroll">
+      <span class="settings-data-big-icon" aria-hidden="true"><svg class="ui-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M3 5v14a9 3 0 0 0 18 0V5M3 12a9 3 0 0 0 18 0"/></svg></span>
+      <div class="settings-eyebrow">DATA &amp; EXPORT</div>
+      <h2 id="settingsDataTitle">දත්ත ආරක්ෂාව / මුද්‍රණය</h2>
+      <p class="settings-data-lead">සැපයුම්කරුවන්, දලු සටහන්, ණය, අඩුකිරීම් සහ මාසික බිල්පත් සැකසුම්වල පිටපතක් ලබාගන්න.</p>
+      <div class="settings-data-alert"><svg class="ui-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 10v6M12 7h.01"/></svg><span>දත්ත PC එකේ SQLite Database එකේ සුරැකේ. Backup ලබාගන්න ඔබන සෑම වතාවකම PC, USB හෝ Google Drive Sync Folder එකක් තෝරන්න.</span></div>
+      <div class="settings-data-actions">
+        <button id="settingsBackupBtn" class="settings-data-action" type="button">
+          <span class="settings-action-icon"><svg class="ui-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12m-4-4 4 4 4-4"/><path d="M4 17v3h16v-3"/></svg></span>
+          <span class="settings-action-copy"><strong>Backup ලබාගන්න</strong><small>Save Location තෝරා JSON ගොනුවක් සුරකින්න</small></span><span class="settings-action-arrow" aria-hidden="true">↗</span>
+        </button>
+        <button id="settingsRestoreBtn" class="settings-data-action" type="button">
+          <span class="settings-action-icon"><svg class="ui-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 17V5m-4 4 4-4 4 4"/><path d="M4 17v3h16v-3"/></svg></span>
+          <span class="settings-action-copy"><strong>Backup නැවත ඇතුළත් කරන්න</strong><small>පෙර සුරැකි JSON දත්ත ප්‍රතිස්ථාපනය කරන්න</small></span><span class="settings-action-arrow" aria-hidden="true">↗</span>
+        </button>
+        <input id="restoreFile" type="file" accept=".json,application/json" hidden onchange="restore(event)">
+        <button id="settingsPrintBtn" class="settings-data-action" type="button">
+          <span class="settings-action-icon"><svg class="ui-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9V3h12v6M6 18H4V9h16v9h-2"/><rect x="6" y="14" width="12" height="7"/><path d="M17 11h.01"/></svg></span>
+          <span class="settings-action-copy"><strong>මුද්‍රණය / PDF</strong><small>දැනට විවෘත පිටුව Print හෝ PDF ලෙස සුරකින්න</small></span><span class="settings-action-arrow" aria-hidden="true">↗</span>
+        </button>
+      </div>
+      <div class="reset-section-title">දත්ත Reset කිරීම</div>
+      <p class="reset-section-note">ඔබට අවශ්‍ය දත්ත කොටස පමණක් Reset කරන්න. මෙය නැවත හැරවිය නොහැකි නිසා මුලින් Backup එකක් ලබාගන්න.</p>
+      <div class="reset-option-list">
+        <button class="reset-option-btn" type="button" data-reset-scope="people"><span class="reset-option-icon">♙</span><span class="reset-option-copy"><strong>සැපයුම්කරුවන් Reset කරන්න</strong><small>සැපයුම්කරුවන් හා ඔවුන්ට සම්බන්ධ දලු, ණය, තහවුරු කළ බිල් සියල්ල</small></span><span class="reset-option-arrow">›</span></button>
+        <button class="reset-option-btn" type="button" data-reset-scope="leaves"><span class="reset-option-icon">❧</span><span class="reset-option-copy"><strong>දලු සටහන් Reset කරන්න</strong><small>සියලු දලු සටහන් සහ ඒවා මත තහවුරු කළ බිල්</small></span><span class="reset-option-arrow">›</span></button>
+        <button class="reset-option-btn" type="button" data-reset-scope="credits"><span class="reset-option-icon">₨</span><span class="reset-option-copy"><strong>කඩ ණය Reset කරන්න</strong><small>ණය, ආපසු ගෙවීම් සහ තහවුරු කළ බිල්</small></span><span class="reset-option-arrow">›</span></button>
+        <button class="reset-option-btn" type="button" data-reset-scope="deductions"><span class="reset-option-icon">−</span><span class="reset-option-copy"><strong>අඩුකිරීම් Reset කරන්න</strong><small>තේ කුඩු / පොහොර / ඩොලමයිට් / රසායන / බැංකු ණය / සුභසාධන සහ සම්බන්ධ තහවුරු කළ බිල්</small></span><span class="reset-option-arrow">›</span></button>
+        <button class="reset-option-btn" type="button" data-reset-scope="bills"><span class="reset-option-icon">▤</span><span class="reset-option-copy"><strong>බිල්පත් Reset කරන්න</strong><small>මාසික මිල / අඩු % / ප්‍රවාහන ගාස්තු සහ තහවුරු කළ බිල්</small></span><span class="reset-option-arrow">›</span></button>
+        <button class="reset-option-btn" type="button" data-reset-scope="all"><span class="reset-option-icon">⚠</span><span class="reset-option-copy"><strong>Full Database Reset</strong><small>සියලු සැපයුම්කරුවන්, දලු, ණය, බිල් සහ මාසික සැකසුම්</small></span><span class="reset-option-arrow">›</span></button>
+      </div>
+      <p class="settings-data-warning">සැලකිල්ලට ගන්න: Restore කිරීමෙන් දැනට ඇති දත්ත ප්‍රතිස්ථාපනය වේ. Restore කිරීමට පෙර අලුත් Backup එකක් ගන්න. මේ Offline අනුවාදයේ සියලුම ගනුදෙනු ඔබේ PC එකේම සුරකිනවා.</p>
+    </div>
+    <div class="settings-data-foot"><span class="settings-footer-dot"></span> GONAGAMUWA STORES</div>
+  </section>
+</aside>
+</div><!-- /appRoot -->
+
+<div id="resetConfirmDialog" class="reset-confirm-overlay" role="dialog" aria-modal="true" aria-labelledby="resetTitle" aria-describedby="resetDescription" hidden>
+  <div class="reset-confirm-card">
+    <div class="reset-confirm-badge" aria-hidden="true">⚠</div>
+    <h2 id="resetTitle">දත්ත Reset කරන්නද?</h2>
+    <p id="resetDescription" class="reset-confirm-lead">මැකෙන දත්ත පරීක්ෂා කරලා තහවුරු කරන්න.</p>
+    <div class="reset-impact"><strong>මෙම Reset එකෙන් මැකෙන දත්ත:</strong><ul id="resetImpactList"></ul></div>
+    <p class="reset-warning"><strong>අවවාදය:</strong> මකා දැමූ දත්ත ආපසු ලබාගන්න පුළුවන් කලින් ලබාගත් Backup එකකින් විතරයි. මේ Reset එක මෙම PC එකේ App දත්තවලට පමණයි.</p>
+    <label for="resetPassword">තහවුරු කිරීමේ Password (0000)</label>
+    <input id="resetPassword" type="password" inputmode="numeric" autocomplete="off" maxlength="4" placeholder="••••" aria-describedby="resetPasswordError"/>
+    <span id="resetPasswordError" class="reset-password-error" role="status" aria-live="polite"></span>
+    <div class="reset-confirm-buttons"><button id="resetCancelBtn" type="button">අවලංගු කරන්න</button><button id="resetProceedBtn" type="button">ඔව්, දත්ත මකන්න</button></div>
+  </div>
+</div>
+
+<div id="restoreConfirmDialog" class="restore-confirm-overlay" role="dialog" aria-modal="true"
+ aria-labelledby="restoreConfirmTitle" aria-describedby="restoreConfirmDescription" hidden>
+ <div class="restore-confirm-card">
+  <span class="restore-confirm-mark" aria-hidden="true">⚠</span>
+  <h2 id="restoreConfirmTitle">Backup එක ප්‍රතිස්ථාපනය කරන්නද?</h2>
+  <p id="restoreConfirmDescription">තෝරාගත් Backup ගොනුව පරීක්ෂා කළා. ඉදිරියට යන්න කලින් විස්තර බලන්න.</p>
+  <p class="restore-confirm-filename" id="restoreConfirmFile"></p>
+  <div class="restore-confirm-grid">
+   <div class="restore-confirm-stat"><span>සැපයුම්කරුවන්</span><strong id="restoreConfirmPeople">0</strong></div>
+   <div class="restore-confirm-stat"><span>දලු සටහන්</span><strong id="restoreConfirmLeaves">0</strong></div>
+   <div class="restore-confirm-stat"><span>ණය ගනුදෙනු</span><strong id="restoreConfirmCredits">0</strong></div>
+   <div class="restore-confirm-stat"><span>අඩුකිරීම් සටහන්</span><strong id="restoreConfirmDeductions">0</strong></div>
+   <div class="restore-confirm-stat"><span>බිල්පත් සැකසුම් මාස</span><strong id="restoreConfirmBilling">0</strong></div><div class="restore-confirm-stat"><span>තහවුරු කළ බිල්පත්</span><strong id="restoreConfirmSettlements">0</strong></div>
+  </div>
+  <p class="restore-confirm-warning"><strong>අවවාදය:</strong> තහවුරු කළොත් දැනට PC එකේ ඇති සියලු දලු, සැපයුම්කරුවන්, ණය, අඩුකිරීම් සහ බිල්පත් සැකසුම් මෙම Backup එකේ දත්තවලින් <strong>ප්‍රතිස්ථාපනය වේ.</strong> ඊට කලින් වර්තමාන දත්තවල Backup එකක් ලබාගන්න.</p>
+  <div class="restore-confirm-actions">
+   <button id="restoreConfirmCancel" type="button">අවලංගු කරන්න</button>
+   <button id="restoreConfirmProceed" type="button">ඔව්, ප්‍රතිස්ථාපනය කරන්න</button>
+  </div>
+ </div>
+</div>
+
+
+
+
+
+<!-- WhatsApp click-to-chat preview: this only opens a chat. The user sends manually. -->
+<dialog id="whatsappPreviewDialog" class="whatsapp-preview-dialog" aria-labelledby="whatsappPreviewTitle">
+  <div class="wa-modal-top">
+    <div class="wa-modal-heading"><span class="wa-modal-mark" aria-hidden="true">💬</span><div><h2 id="whatsappPreviewTitle">WhatsApp පණිවිඩය</h2><p>පණිවිඩය පරීක්ෂා කර WhatsApp විවෘත කරන්න</p></div></div>
+    <button type="button" class="wa-modal-close" id="waCloseBtn" aria-label="වසන්න">✕</button>
+  </div>
+  <div class="wa-recipient" id="waRecipient"></div>
+  <label for="waMessageText">යවන පණිවිඩය (අවශ්‍ය නම් වෙනස් කරන්න)</label>
+  <textarea id="waMessageText" rows="11" spellcheck="false" maxlength="4000"></textarea>
+  <p class="wa-privacy-note" id="waUnsavedHint" hidden><strong>සටහන:</strong> මේ දලු ප්‍රමාණය තවම දලු සටහන්වලට සුරැකී නැහැ. අවශ්‍ය නම් WhatsApp යැවූ පසු “දලු සටහන එක් කරන්න” ඔබන්න.</p>
+  <p class="wa-privacy-note">WhatsApp විවෘත වූ පසුව <strong>Send</strong> ඔබන තුරු පණිවිඩය යැවෙන්නේ නැහැ.</p>
+  <div class="wa-modal-actions">
+    <button type="button" class="secondary" id="waCancelBtn">අවලංගු කරන්න</button>
+    <button type="button" class="whatsapp-btn" id="waOpenBtn">💬 WhatsApp විවෘත කරන්න</button>
+  </div>
+</dialog>
+
+<script src="tauri-bridge.js" defer></script>
+</body></html>
