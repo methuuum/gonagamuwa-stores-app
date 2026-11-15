@@ -1,6 +1,6 @@
 /* Tauri v2 bridge. The old UI has synchronous reads. We preload its seven keys,
    and serialize all asynchronous writes. Backups and app exit await all writes. */
-const {core:{invoke},window:{getCurrentWindow},dialog:{save}} = window.__TAURI__;
+const {core:{invoke},window:{getCurrentWindow},dialog:{save:chooseBackupSavePath}} = window.__TAURI__;
 const KEYS = new Set(['tea_people','tea_leaves','tea_credits','tea_extra_deductions','tea_billing_settings','tea_confirmed_settlements','tea_monthly_welfare']);
 const fatal = e => { console.error(e); document.body.textContent = 'Database එක Open කිරීම අසාර්ථකයි: '+String(e); };
 async function main(){
@@ -24,7 +24,7 @@ async function main(){
       await flush();
       const today=new Date();
       const stamp=[today.getFullYear(),String(today.getMonth()+1).padStart(2,'0'),String(today.getDate()).padStart(2,'0')].join('-');
-      const destination=await save({title:'Backup ගොනුව සුරකින්න',defaultPath:'Gonagamuwa_Backup_'+stamp+'.json',filters:[{name:'JSON Backup',extensions:['json']}]});
+      const destination=await chooseBackupSavePath({title:'Backup ගොනුව සුරකින්න',defaultPath:'Gonagamuwa_Backup_'+stamp+'.json',filters:[{name:'JSON Backup',extensions:['json']}]});
       if(!destination)return null;
       await flush();
       return invoke('save_backup_to',{destination});
